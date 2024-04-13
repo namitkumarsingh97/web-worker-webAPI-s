@@ -18,7 +18,7 @@
 
 ## Real Life Use Cases of Web Worker
 
-1. Data Processing and Analysis: Web Workers are often used for heavy data processing tasks such as parsing large datasets, performing complex calculations, or running algorithms. For example, in data visualization applications, Web Workers can process large datasets in the background while keeping the UI responsive.
+1. <bold>Data Processing and Analysis:</bold> Web Workers are often used for heavy data processing tasks such as parsing large datasets, performing complex calculations, or running algorithms. For example, in data visualization applications, Web Workers can process large datasets in the background while keeping the UI responsive.
 2. Image Manipulation: Image editing applications or websites often use Web Workers to perform image processing tasks such as resizing, cropping, or applying filters. This allows users to interact with the interface smoothly while image processing tasks are carried out in the background.
 3. Game Development: In browser-based games, Web Workers can be utilized for tasks such as game logic, physics simulations, pathfinding algorithms, or AI computations. This helps maintain a consistent frame rate and overall performance of the game.
 4. Parallelizing Tasks: Web Workers enable parallel execution of tasks, which can be useful for scenarios like parallelizing HTTP requests to fetch data from multiple sources simultaneously. This can improve the efficiency and speed of fetching and processing data in web applications.
