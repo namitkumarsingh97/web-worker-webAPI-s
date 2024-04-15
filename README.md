@@ -98,7 +98,7 @@ myWorker.onmessage = (e) => {
 
 - Here we grab the message event data and set it as the textContent of the result paragraph, so the user can see the result of the calculation.
 
-`Note: Notice that `onmessage`and`postMessage()`need to be hung off the Worker object when used in the main script thread, but not when used in the`worker`. This is because, inside the worker, the worker is effectively the global scope.`
+`Note: Notice that onmessage and postMessage() need to be hung off the Worker object when used in the main script thread, but not when used in the worker. This is because, inside the worker, the worker is effectively the global scope.`
 
 `Note: When a message is passed between the main thread and worker, it is copied or "transferred" (moved), not shared.`
 
@@ -146,3 +146,40 @@ importScripts(
   "//example.com/hello.js",
 ); /* You can import scripts from other origins */
 ```
+
+## Shared workers
+
+- A shared worker is accessible by multiple scripts — even if they are being accessed by different windows, iframes or even workers.
+
+- Note
+  ⋅⋅1. If SharedWorker can be accessed from several browsing contexts, all those browsing contexts must share the exact same origin (same protocol, host, and port).
+  ⋅⋅2. In Firefox, shared workers cannot be shared between documents loaded in private and non-private windows.
+
+### Spawning a shared worker
+
+- Spawning a new shared worker is pretty much the same as with a dedicated worker, but with a different constructor name.
+
+```
+const myWorker = new SharedWorker("worker.js");
+```
+
+- One big difference is that with a shared worker you have to communicate via a `port` object — an explicit port is opened that the scripts can use to communicate with the worker (this is done implicitly in the case of dedicated workers).
+- The port connection needs to be started either implicitly by use of the `onmessage` event handler or explicitly with the `start()` method before any messages can be posted. Calling `start()` is only needed if the `message` event is wired up via the `addEventListener()` method.
+- Note: When using the `start()` method to open the port connection, it needs to be called from both the parent thread and the worker thread if two-way communication is needed.
+
+### Sending messages to and from a shared worker
+
+- Now messages can be sent to the worker as before, but the `postMessage()` method has to be invoked through the port object.
+
+```
+squareNumber.onchange = () => {
+  myWorker.port.postMessage([squareNumber.value, squareNumber.value]);
+  console.log("Message posted to worker");
+};
+```
+
+## Start Project
+
+> npm install -g http-server
+
+> http-server
